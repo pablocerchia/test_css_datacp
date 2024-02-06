@@ -6,7 +6,7 @@ from streamlit_gsheets import GSheetsConnection
 
 st.set_page_config(page_title='Control Cuotas', layout='wide')
 conn = st.connection("gsheets", type=GSheetsConnection)
-df = conn.read(spreadsheet='Base')
+df = conn.read(spreadsheet=spreadsheet)
 
 
 cuotas = pd.read_excel('Cuotas.xlsx', sheet_name='Hoja1')
