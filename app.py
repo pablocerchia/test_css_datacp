@@ -7,7 +7,7 @@ from streamlit_gsheets import GSheetsConnection
 st.set_page_config(page_title='Control Cuotas', layout='wide')
 conn = st.connection("gsheets", type=GSheetsConnection)
 spreadsheet_url = "https://docs.google.com/spreadsheets/d/1Y0yQPfLo4XgTd3BXPFlAJpJs2WC-2TZ9lr0usZxdUZs/edit?usp=sharing"
-df = conn.read(spreadsheet=spreadsheet_url)
+df = conn.read(spreadsheet=spreadsheet_url,ttl='30m')
 
 
 cuotas = pd.read_excel('Cuotas.xlsx', sheet_name='Hoja1')
