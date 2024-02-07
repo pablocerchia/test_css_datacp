@@ -18,10 +18,10 @@ num_unique_duplicates = unique_duplicates.shape[0]
 total_rows = df.shape[0]
 
 # Percentage of cases that are duplicates
-percentage_duplicates = (num_duplicates / total_rows) * 100
+percentage_duplicates = ((num_duplicates / total_rows) * 100).round(2)
 
 # Percentage of unique cases of duplicates out of the total
-percentage_unique_duplicates = (num_unique_duplicates / total_rows) * 100
+percentage_unique_duplicates = ((num_unique_duplicates / total_rows) * 100).round(2)
 df = df.drop_duplicates(subset=['ipAddress'], keep='first')
 
 
@@ -72,5 +72,5 @@ with col3:
     st.write('Fausti')
     st.dataframe(df_final_fausti, use_container_width=True, hide_index=True)
 
-st.write(f"Cantidad casos duplicados: {num_duplicates}({percentage_duplicates}")
-st.write(f"Cantidad casos duplicados unicos: {num_unique_duplicates}({percentage_unique_duplicates}")
+st.write(f"Cantidad casos duplicados: {num_duplicates}({percentage_duplicates})")
+st.write(f"Cantidad casos duplicados unicos: {num_unique_duplicates}({percentage_unique_duplicates})")
