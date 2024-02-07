@@ -9,6 +9,11 @@ conn = st.connection("gsheets", type=GSheetsConnection)
 spreadsheet_url = "https://docs.google.com/spreadsheets/d/1Y0yQPfLo4XgTd3BXPFlAJpJs2WC-2TZ9lr0usZxdUZs/edit?usp=sharing"
 df = conn.read(spreadsheet=spreadsheet_url,ttl='30m')
 df = df.drop_duplicates(subset=['ipAddress'], keep='first')
+# Count duplicates
+num_duplicates = df.duplicated(subset=['ipAddress']).sum()
+
+# Find unique cases of duplicates
+unique_duplicates = df[df.duplicated(subset=['ipAddress'], keep=False)].drop_duplicates(subset=['ipAddress'])
 
 cuotas = pd.read_excel('Cuotas.xlsx', sheet_name='Hoja1')
 cuotas= cuotas[['municipio', 'Cuota']]
@@ -54,3 +59,6 @@ with col2:
 with col3:
     st.write('Fausti')
     st.dataframe(df_final_fausti, use_container_width=True, hide_index=True)
+
+st.write(f"Cantidad casos duplicados: {num_duplicates}")
+st.write(f"Cantidad casos duplicados unicos: {unique_duplicates}")
