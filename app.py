@@ -74,5 +74,5 @@ with col3:
     st.write('Fausti')
     st.dataframe(df_final_fausti, use_container_width=True, hide_index=True)
 
-st.write(f"Cantidad casos duplicados: {num_duplicates}({rounded_percentage_duplicates})")
-st.write(f"Cantidad casos duplicados unicos: {num_unique_duplicates}({rounded_percentage_unique_duplicates})")
+st.write(f"Cantidad casos duplicados: {num_duplicates} ({rounded_percentage_duplicates}%)")
+st.write(f"Cantidad casos duplicados unicos: {num_unique_duplicates} ({rounded_percentage_unique_duplicates}%)")
