@@ -9,13 +9,15 @@ conn = st.connection("gsheets", type=GSheetsConnection)
 spreadsheet_url = "https://docs.google.com/spreadsheets/d/1Y0yQPfLo4XgTd3BXPFlAJpJs2WC-2TZ9lr0usZxdUZs/edit#gid=1573688581"
 df = conn.read(spreadsheet=spreadsheet_url,ttl='30m')
 
+spreadsheet_url2 = "https://docs.google.com/spreadsheets/d/1Y0yQPfLo4XgTd3BXPFlAJpJs2WC-2TZ9lr0usZxdUZs/edit?usp=sharing"
+df2 = conn.read(spreadsheet=spreadsheet_url2,ttl='30m')
 # Count duplicates in the 'ipAddress' column
-num_duplicates = df.duplicated(subset=['ipAddress']).sum()
+num_duplicates = df2.duplicated(subset=['ipAddress']).sum()
 
 # Find unique cases of duplicates
-unique_duplicates = df[df.duplicated(subset=['ipAddress'], keep=False)].drop_duplicates(subset=['ipAddress'], keep='last')
+unique_duplicates = df2[df2.duplicated(subset=['ipAddress'], keep=False)].drop_duplicates(subset=['ipAddress'], keep='last')
 num_unique_duplicates = unique_duplicates.shape[0]
-total_rows = df.shape[0]
+total_rows = df2.shape[0]
 
 # Percentage of cases that are duplicates
 percentage_duplicates = (num_duplicates / total_rows) * 100
@@ -24,6 +26,9 @@ percentage_duplicates = (num_duplicates / total_rows) * 100
 percentage_unique_duplicates = (num_unique_duplicates / total_rows) * 100
 rounded_percentage_duplicates = round(percentage_duplicates, 2)
 rounded_percentage_unique_duplicates = round(percentage_unique_duplicates, 2)
+
+
+
 df = df.drop_duplicates(subset=['ipAddress'], keep='first')
 
 
