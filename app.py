@@ -18,10 +18,10 @@ num_unique_duplicates = unique_duplicates.shape[0]
 total_rows = df.shape[0]
 
 # Percentage of cases that are duplicates
-percentage_duplicates = ((num_duplicates / total_rows) * 100).round(2)
+percentage_duplicates = (num_duplicates / total_rows) * 100
 
 # Percentage of unique cases of duplicates out of the total
-percentage_unique_duplicates = ((num_unique_duplicates / total_rows) * 100).round(2)
+percentage_unique_duplicates = (num_unique_duplicates / total_rows) * 100
 rounded_percentage_duplicates = round(percentage_duplicates, 2)
 rounded_percentage_unique_duplicates = round(percentage_unique_duplicates, 2)
 df = df.drop_duplicates(subset=['ipAddress'], keep='first')
