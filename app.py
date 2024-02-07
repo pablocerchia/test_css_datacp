@@ -13,7 +13,7 @@ df = conn.read(spreadsheet=spreadsheet_url,ttl='30m')
 num_duplicates = df.duplicated(subset=['ipAddress']).sum()
 
 # Find unique cases of duplicates
-unique_duplicates = df[df.duplicated(subset=['ipAddress'], keep=False)].drop_duplicates(subset=['ipAddress'])
+unique_duplicates = df[df.duplicated(subset=['ipAddress'], keep=False)].drop_duplicates(subset=['ipAddress'], keep='last')
 df = df.drop_duplicates(subset=['ipAddress'], keep='first')
 
 
