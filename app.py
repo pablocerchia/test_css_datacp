@@ -8,12 +8,16 @@ st.set_page_config(page_title='Control Cuotas', layout='wide')
 conn = st.connection("gsheets", type=GSheetsConnection)
 spreadsheet_url = "https://docs.google.com/spreadsheets/d/1Y0yQPfLo4XgTd3BXPFlAJpJs2WC-2TZ9lr0usZxdUZs/edit?usp=sharing"
 df = conn.read(spreadsheet=spreadsheet_url,ttl='30m')
-df = df.drop_duplicates(subset=['ipAddress'], keep='first')
-# Count duplicates
+
+# Count duplicates in the 'ipAddress' column
 num_duplicates = df.duplicated(subset=['ipAddress']).sum()
 
 # Find unique cases of duplicates
 unique_duplicates = df[df.duplicated(subset=['ipAddress'], keep=False)].drop_duplicates(subset=['ipAddress'])
+df = df.drop_duplicates(subset=['ipAddress'], keep='first')
+
+
+
 
 cuotas = pd.read_excel('Cuotas.xlsx', sheet_name='Hoja1')
 cuotas= cuotas[['municipio', 'Cuota']]
